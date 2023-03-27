@@ -1,0 +1,25 @@
+label {
+  position: relative;
+  display: flex;
+  justify-content: end;
+  padding-right: 25px;
+  cursor: pointer;
+
+  .real-checkbox {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .custom-checkbox-close {
+    position: absolute;
+    bottom: 12px;
+  }
+
+  .custom-checkbox-open {
+    position: absolute;
+    bottom: 12px;
+  }
+}

@@ -1,0 +1,25 @@
+.form_background {
+  width: 100vw;
+  height: 100vh;
+
+  background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
+
+  .content_wrapper {
+    top: 50%;
+    left: 50%;
+    max-width: 530px;
+    position: relative;
+    transform: translate(-50%, -50%);
+  }
+
+  h1 {
+    text-align: center;
+    font-weight: 700;
+    width: 530px;
+    padding-bottom: 45px;
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: 0.1px;
+    color: #fff;
+  }
+}
