@@ -1,0 +1,18 @@
+.form {
+  max-width: 530px;
+  padding: 55px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 16px;
+
+  .title_error {
+    text-align: center;
+  }
+
+  .form_text_error {
+    text-align: center;
+    font-weight: 500;
+    color: #a7a7a7;
+    padding-top: 32px;
+  }
+}
