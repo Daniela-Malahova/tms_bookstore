@@ -30,37 +30,92 @@
   .form_text_password:hover {
     color: #f42c4f;
   }
-
-  .form_text {
-    text-align: start;
-    font-size: 16px;
-    line-height: 24px;
-    color: #727272;
-    padding-top: 16px;
-
-    .login-svg__arrow {
-      font-weight: 600;
-      text-transform: uppercase;
-      font-size: 12px;
-      line-height: 18px;
-      color: #363636;
-      padding-left: 16px;
-      svg {
-        position: absolute;
-        bottom: 59px;
-        right: 160px;
-      }
-    }
-  }
 }
 
 @media (max-width: 768px) {
   .form_background {
     h1 {
-      max-width: 420px;
+      max-width: 620px;
     }
     .form {
-      max-width: 420px;
+      max-width: 620px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .form_background {
+    .content_wrapper {
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      h1 {
+        max-width: 400px;
+        font-size: 24px;
+        line-height: 36px;
+        padding-bottom: 15px;
+      }
+      .form {
+        max-width: 400px;
+        padding: 25px;
+        h2 {
+          font-size: 20px;
+          line-height: 26px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .form_background {
+    .content_wrapper {
+      padding-left: 15px;
+      padding-right: 15px;
+      h1 {
+        max-width: 370px;
+        font-size: 20px;
+        line-height: 30px;
+      }
+      .form {
+        max-width: 370px;
+        padding: 20px;
+        .arrow_link {
+          display: block;
+          align-items: center;
+          .form_text {
+            font-size: 15px;
+            line-height: 20px;
+          }
+          a {
+            .login-svg__arrow {
+              justify-content: inherit;
+              align-items: center;
+              padding-top: 5px;
+              .arrow_text {
+                padding-left: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .form_background {
+    .content_wrapper {
+      padding-left: 10px;
+      padding-right: 10px;
+      h1 {
+        max-width: 350px;
+        font-size: 18px;
+        line-height: 28px;
+      }
+      .form {
+        max-width: 350px;
+      }
     }
   }
 }

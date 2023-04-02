@@ -3,7 +3,6 @@ import React, {
   ForwardedRef,
   forwardRef,
   HTMLAttributes,
-  useState,
 } from "react";
 import classNames from "classnames";
 
@@ -39,8 +38,6 @@ const Input = forwardRef(
     }: InputProps,
     ref: ForwardedRef<HTMLInputElement>
   ): JSX.Element => {
-    const [inputText, setInputText] = useState<string>("");
-
     return (
       <div className="input_wrapper">
         <input
@@ -50,14 +47,12 @@ const Input = forwardRef(
           autoComplete={autocomplete}
           id={id}
           type={type}
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
+          value={value}
+          onChange={onChange}
           ref={ref}
           {...rest}
         />
-        <span className={inputText ? "active_label" : `label_${type}`}>
-          {text}
-        </span>
+        <span className={value ? "active_label" : `label_${type}`}>{text}</span>
       </div>
     );
   }
