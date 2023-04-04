@@ -1,4 +1,3 @@
-// import Loader from "../loader/loader";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AuthLayout from "../authLayout/authLayout";
@@ -11,8 +10,6 @@ import RequireAuth from "../../hooks/requireAuth";
 
 function App() {
   return (
-    // <Loader />
-
     <Routes>
       <Route
         path="/"
