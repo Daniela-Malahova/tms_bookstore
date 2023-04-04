@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Button from "../../../../common/button/button";
 import Input from "../../../../common/input/input";
@@ -11,14 +12,18 @@ interface SecondStepData {
 }
 
 const SecondStep = ({ formData, setFormData }: UserDataProps) => {
+  const [userName, setUserName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<SecondStepData>({ mode: "onChange" });
+    reset,
+  } = useForm<SecondStepData>({ mode: "onBlur" });
 
   const formSubmitHandler = ({ userName, lastName }: SecondStepData) => {
     setFormData({ ...formData, userName, lastName });
+    reset();
   };
 
   return (
@@ -31,7 +36,9 @@ const SecondStep = ({ formData, setFormData }: UserDataProps) => {
             type="text"
             text="Имя"
             id="userName"
+            value={userName}
             {...register("userName", { required: true })}
+            onChange={(e) => setUserName(e.target.value)}
           />
           {errors.userName && (
             <p className="error_message">Поле не может быть пустым</p>
@@ -41,7 +48,9 @@ const SecondStep = ({ formData, setFormData }: UserDataProps) => {
             type="text"
             text="Фамилия"
             id="lastName"
+            value={lastName}
             {...register("lastName", { required: true })}
+            onChange={(e) => setLastName(e.target.value)}
           />
           {errors.lastName && (
             <p className="error_message">Поле не может быть пустым</p>

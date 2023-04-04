@@ -4,32 +4,42 @@ import Button from "../../../../common/button/button";
 import Input from "../../../../common/input/input";
 import Checkbox from "../../../../common/checkbox/checkbox";
 import { UserDataProps } from "../signupForm";
-import { checkStringToLatinAndNum } from "../../../../../constants/regExp";
+import {
+  checkEmail,
+  checkStringToLatinAndNum,
+} from "../../../../../constants/regExp";
 
 import "../signupForm.scss";
 
 interface FirstStepData {
-  login: string;
+  email: string;
   password: string;
 }
 
 const FirstStep = ({ formData, setFormData }: UserDataProps) => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setpassword] = useState<string>("");
   const [checkboxChecked, setCheckboxChecked] = useState<boolean>(false);
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<FirstStepData>({ mode: "onChange" });
+    reset,
+  } = useForm<FirstStepData>({ mode: "onBlur" });
 
-  const formSubmitHandler = ({ login, password }: FirstStepData) => {
-    setFormData({ ...formData, login, password });
+  const formSubmitHandler = ({ email, password }: FirstStepData) => {
+    setFormData({ ...formData, email, password });
+    reset();
   };
 
   const onChecked = () => {
     setCheckboxChecked((checkboxChecked) => !checkboxChecked);
   };
 
+  const checkEmailError = errors.email ? (
+    <p className="error_message">Введите корректный e-mail</p>
+  ) : null;
 
   return (
     <>
@@ -38,29 +48,26 @@ const FirstStep = ({ formData, setFormData }: UserDataProps) => {
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           <Input
             autocomplete="off"
-            type="text"
-            text="Придумайте логин для входа"
-            id="login"
-            {...register("login", {
-              pattern: checkStringToLatinAndNum,
-              required: true,
-            })}
+            type="email"
+            text="E-mail"
+            id="email"
+            value={email}
+            {...register("email", { pattern: checkEmail, required: true })}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          <p
-            className={errors.login ? "error_message" : "form_text_validation"}
-          >
-            Используйте для логина латинский алфавит и цифры
-          </p>
+          {checkEmailError}
           <Input
             autocomplete="off"
             type={checkboxChecked ? "text" : "password"}
             text="Пароль"
             id="password"
+            value={password}
             {...register("password", {
               pattern: checkStringToLatinAndNum,
               required: true,
               minLength: 8,
             })}
+            onChange={(e) => setpassword(e.target.value)}
           />
           <Checkbox
             type="checkbox"

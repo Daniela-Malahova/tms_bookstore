@@ -1,11 +1,11 @@
 import Button from "../../common/button/button";
-import "./authError.scss";
+import "./authMessage.scss";
 
 interface AuthErrorProps {
   title: string;
   message: string;
   buttonTitle: string;
-  buttonHandler?: () => {};
+  buttonHandler?: () => void;
 }
 
 const AuthError = ({

@@ -1,9 +1,17 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
+import { useAppDispatch } from "../../../../../hooks/reduxHooks";
 import Input from "../../../../common/input/input";
 import Button from "../../../../common/button/button";
 import Checkbox from "../../../../common/checkbox/checkbox";
 import { checkStringToLatinAndNum } from "../../../../../constants/regExp";
+import {
+  setError,
+  setIsChangePassword,
+  setIsStartLoaging,
+  setIsStopLoaging,
+} from "../../../../../redux/slices/userSlice";
 
 interface PasswordSecondData {
   password: string;
@@ -11,19 +19,47 @@ interface PasswordSecondData {
 }
 
 const PasswordSecond = () => {
+  const [password, setPassword] = useState<string>("");
+  const [newPassword, setNewPassword] = useState<string>("");
   const [checkboxCheckedFirst, setCheckboxCheckedFirst] =
     useState<boolean>(false);
   const [checkboxCheckedSecond, setCheckboxCheckedSecond] =
     useState<boolean>(false);
 
+  const dispatch = useAppDispatch();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm<PasswordSecondData>({ mode: "onChange" });
+    reset,
+  } = useForm<PasswordSecondData>({ mode: "onBlur" });
 
-  const formSubmitHandler = (data: PasswordSecondData) => {
-    console.log(data);
+  const changePasswordHandler = (password: string) => {
+    const auth = getAuth();
+    dispatch(setIsStartLoaging());
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (auth.currentUser) {
+          console.log(auth.currentUser);
+          updatePassword(auth.currentUser, password)
+            .then(() => {
+              dispatch(setIsChangePassword());
+            })
+            .catch(() => {
+              dispatch(setError());
+            })
+            .finally(() => {
+              dispatch(setIsStopLoaging());
+            });
+        }
+      }
+    });
+  };
+
+  const formSubmitHandler = ({ password }: PasswordSecondData) => {
+    changePasswordHandler(password);
+    reset();
   };
 
   const onCheckedFirst = () => {
@@ -34,8 +70,6 @@ const PasswordSecond = () => {
     setCheckboxCheckedSecond((checkboxCheckedSecond) => !checkboxCheckedSecond);
   };
 
-  console.log(errors);
-
   return (
     <div className="form_wrapper">
       <form onSubmit={handleSubmit(formSubmitHandler)}>
@@ -44,11 +78,13 @@ const PasswordSecond = () => {
           type={checkboxCheckedFirst ? "text" : "password"}
           text="Новый пароль"
           id="newPassword"
+          value={password}
           {...register("password", {
             pattern: checkStringToLatinAndNum,
             required: true,
             minLength: 8,
           })}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Checkbox
           type="checkbox"
@@ -67,12 +103,14 @@ const PasswordSecond = () => {
           type={checkboxCheckedSecond ? "text" : "password"}
           text="Повторите пароль"
           id="confirmPassword"
+          value={newPassword}
           {...register("confirmPassword", {
             required: true,
             validate: {
               confirmError: (v, x) => v === x.password,
             },
           })}
+          onChange={(e) => setNewPassword(e.target.value)}
         />
 
         {errors?.confirmPassword && (

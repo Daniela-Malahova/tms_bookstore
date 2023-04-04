@@ -1,27 +1,77 @@
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import MaskedInput from "react-text-mask";
+import { useAppDispatch } from "../../../../../hooks/reduxHooks";
+import {
+  setError,
+  setIsStartLoaging,
+  setIsStopLoaging,
+  setUser,
+} from "../../../../../redux/slices/userSlice";
 import Button from "../../../../common/button/button";
 import Input from "../../../../common/input/input";
 import { UserDataProps } from "../signupForm";
-import { checkEmail, checkPhone } from "../../../../../constants/regExp";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
+import {
+  checkPhone,
+  checkStringToLatinAndNum,
+} from "../../../../../constants/regExp";
 
 import "../signupForm.scss";
 
 interface ThirdStepData {
-  phone: string;
-  email: string;
+  phoneNumber: string;
+  login: string;
 }
 
 const ThirdStep = ({ formData, setFormData }: UserDataProps) => {
+  const [login, setLogin] = useState<string>("");
+  const dispatch = useAppDispatch();
+
   const {
     register,
     formState: { errors },
     handleSubmit,
+    reset,
     control,
   } = useForm<ThirdStepData>({ mode: "onChange" });
 
-  const formSubmitHandler = ({ phone, email }: ThirdStepData) => {
-    setFormData({ ...formData, phone, email });
+  const userRegistration = () => {
+    const auth = getAuth();
+
+    if (formData.email && formData.password) {
+      dispatch(setIsStartLoaging());
+      createUserWithEmailAndPassword(auth, formData.email, formData.password)
+        .then(({ user }) => {
+          updateProfile(user, {
+            displayName: `${formData.userName} ${formData.lastName}`,
+          });
+
+          dispatch(
+            setUser({
+              email: user.email,
+              id: user.uid,
+              token: user.refreshToken,
+            })
+          );
+        })
+        .catch((error) => {
+          dispatch(setError());
+        })
+        .finally(() => {
+          dispatch(setIsStopLoaging());
+        });
+    }
+  };
+
+  const formSubmitHandler = ({ phoneNumber, login }: ThirdStepData) => {
+    setFormData({ ...formData, phoneNumber, login });
+    userRegistration();
+    reset();
   };
 
   const checkPhonePrefix = (value: string) => {
@@ -42,20 +92,14 @@ const ThirdStep = ({ formData, setFormData }: UserDataProps) => {
   };
 
   const checkPhoneError = () => {
-    if (errors.phone?.type === "prefixError") {
+    if (errors.phoneNumber?.type === "prefixError") {
       return <p className="error_message">Проверьте код оператора</p>;
-    } else if (errors.phone?.type === "phoneError") {
+    } else if (errors.phoneNumber?.type === "phoneError") {
       return <p className="error_message">Введите корректный номер</p>;
     }
     return (
       <p className="form_text_validation">В формате +375 (xx) xxx-xx-xx</p>
     );
-  };
-
-  const checkEmailError = () => {
-    if (errors.email) {
-      return <p className="error_message">Введите корректный e-mail</p>;
-    }
   };
 
   return (
@@ -65,7 +109,7 @@ const ThirdStep = ({ formData, setFormData }: UserDataProps) => {
         <form onSubmit={handleSubmit(formSubmitHandler)}>
           <div className="input_wrapper">
             <Controller
-              name="phone"
+              name="phoneNumber"
               control={control}
               rules={{
                 required: true,
@@ -93,13 +137,21 @@ const ThirdStep = ({ formData, setFormData }: UserDataProps) => {
 
           <Input
             autocomplete="off"
-            type="email"
-            text="E-mail"
-            id="email"
-            {...register("email", { pattern: checkEmail, required: true })}
+            type="text"
+            text="Придумайте логин"
+            id="login"
+            value={login}
+            {...register("login", {
+              pattern: checkStringToLatinAndNum,
+              required: true,
+            })}
+            onChange={(e) => setLogin(e.target.value)}
           />
-
-          {checkEmailError()}
+          <p
+            className={errors.login ? "error_message" : "form_text_validation"}
+          >
+            Используйте для логина латинский алфавит и цифры
+          </p>
 
           <Button
             id="button-form-login"
