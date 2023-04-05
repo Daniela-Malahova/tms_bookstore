@@ -1,12 +1,6 @@
+import { AuthErrorProps } from "../../../types/interfaces";
 import Button from "../../common/button/button";
 import "./authMessage.scss";
-
-interface AuthErrorProps {
-  title: string;
-  message: string;
-  buttonTitle: string;
-  buttonHandler?: () => void;
-}
 
 const AuthError = ({
   title,

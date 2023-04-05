@@ -1,41 +1,17 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch } from "../../../../../hooks/reduxHooks";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import {
-  setError,
-  setIsResetEmail,
-  setIsStartLoaging,
-  setIsStopLoaging,
-} from "../../../../../redux/slices/userSlice";
+import { passwordRecovery } from "../../../../../redux/slices/userSlice";
 import Input from "../../../../common/input/input";
 import Button from "../../../../common/button/button";
 import { checkEmail } from "../../../../../constants/regExp";
+import { PasswordFirstData } from "../../../../../types/interfaces";
 
 import ".././passwordRecoveryForm.scss";
-
-interface PasswordFirstData {
-  email: string;
-}
 
 const PasswordFirst = () => {
   const [email, setEmail] = useState<string>("");
   const dispatch = useAppDispatch();
-
-  const resedEmailHandler = (email: string) => {
-    const auth = getAuth();
-    dispatch(setIsStartLoaging());
-    sendPasswordResetEmail(auth, email)
-      .then(() => {
-        dispatch(setIsResetEmail());
-      })
-      .catch(() => {
-        dispatch(setError());
-      })
-      .finally(() => {
-        dispatch(setIsStopLoaging());
-      });
-  };
 
   const {
     register,
@@ -45,7 +21,7 @@ const PasswordFirst = () => {
   } = useForm<PasswordFirstData>({ mode: "onBlur" });
 
   const formSubmitHandler = ({ email }: PasswordFirstData) => {
-    resedEmailHandler(email);
+    dispatch(passwordRecovery(email));
     reset();
   };
 

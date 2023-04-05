@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import {
+  SignInSecondStepData,
+  UserDataProps,
+} from "../../../../../types/interfaces";
 import Button from "../../../../common/button/button";
 import Input from "../../../../common/input/input";
-import { UserDataProps } from "../signupForm";
 
 import "../signupForm.scss";
-
-interface SecondStepData {
-  userName: string;
-  lastName: string;
-}
 
 const SecondStep = ({ formData, setFormData }: UserDataProps) => {
   const [userName, setUserName] = useState<string>("");
@@ -19,9 +17,9 @@ const SecondStep = ({ formData, setFormData }: UserDataProps) => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<SecondStepData>({ mode: "onBlur" });
+  } = useForm<SignInSecondStepData>({ mode: "onBlur" });
 
-  const formSubmitHandler = ({ userName, lastName }: SecondStepData) => {
+  const formSubmitHandler = ({ userName, lastName }: SignInSecondStepData) => {
     setFormData({ ...formData, userName, lastName });
     reset();
   };

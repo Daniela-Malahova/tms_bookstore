@@ -1,15 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import {
-  removeError,
-  setError,
-  setIsAuth,
-  setIsStartLoaging,
-  setIsStopLoaging,
-} from "../../../../redux/slices/userSlice";
+import { logIn, removeError } from "../../../../redux/slices/userSlice";
 import AuthError from "../../authMessage/authMessage";
 import Button from "../../../common/button/button";
 import Input from "../../../common/input/input";
@@ -19,13 +12,9 @@ import {
   checkEmail,
   checkStringToLatinAndNum,
 } from "../../../../constants/regExp";
+import { LoginCredsProps } from "../../../../types/interfaces";
 
 import "./loginForm.scss";
-
-interface LoginFormData {
-  email: string;
-  password: string;
-}
 
 const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
@@ -40,26 +29,10 @@ const LoginForm = () => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<LoginFormData>({ mode: "onBlur" });
+  } = useForm<LoginCredsProps>({ mode: "onBlur" });
 
-  const loginHandler = (email: string, password: string) => {
-    dispatch(setIsStartLoaging());
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        dispatch(setIsAuth());
-        localStorage.setItem("userToken", user.refreshToken);
-      })
-      .catch((error) => {
-        dispatch(setError());
-      })
-      .finally(() => {
-        dispatch(setIsStopLoaging());
-      });
-  };
-
-  const formSubmitHandler = ({ email, password }: LoginFormData) => {
-    loginHandler(email, password);
+  const formSubmitHandler = (data: LoginCredsProps) => {
+    dispatch(logIn(data));
     reset();
   };
 

@@ -1,13 +1,6 @@
+import { CheckboxProps } from "../../../types/interfaces";
 import { SvgCollection } from "../svg/svg";
 import "./checkbox.scss";
-
-interface CheckboxProps {
-  type: "checkbox";
-  id: string;
-  name: string;
-  checked: boolean;
-  onChecked: () => void;
-}
 
 const Checkbox = ({ type, id, name, checked, onChecked }: CheckboxProps) => {
   return (
