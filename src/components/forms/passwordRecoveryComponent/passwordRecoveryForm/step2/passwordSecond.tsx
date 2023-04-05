@@ -1,22 +1,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAuth, updatePassword, onAuthStateChanged } from "firebase/auth";
 import { useAppDispatch } from "../../../../../hooks/reduxHooks";
 import Input from "../../../../common/input/input";
 import Button from "../../../../common/button/button";
 import Checkbox from "../../../../common/checkbox/checkbox";
 import { checkStringToLatinAndNum } from "../../../../../constants/regExp";
-import {
-  setError,
-  setIsChangePassword,
-  setIsStartLoaging,
-  setIsStopLoaging,
-} from "../../../../../redux/slices/userSlice";
-
-interface PasswordSecondData {
-  password: string;
-  confirmPassword: string;
-}
+import { changePassword } from "../../../../../redux/slices/userSlice";
+import { PasswordSecondData } from "../../../../../types/interfaces";
 
 const PasswordSecond = () => {
   const [password, setPassword] = useState<string>("");
@@ -35,30 +25,8 @@ const PasswordSecond = () => {
     reset,
   } = useForm<PasswordSecondData>({ mode: "onBlur" });
 
-  const changePasswordHandler = (password: string) => {
-    const auth = getAuth();
-    dispatch(setIsStartLoaging());
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        if (auth.currentUser) {
-          console.log(auth.currentUser);
-          updatePassword(auth.currentUser, password)
-            .then(() => {
-              dispatch(setIsChangePassword());
-            })
-            .catch(() => {
-              dispatch(setError());
-            })
-            .finally(() => {
-              dispatch(setIsStopLoaging());
-            });
-        }
-      }
-    });
-  };
-
   const formSubmitHandler = ({ password }: PasswordSecondData) => {
-    changePasswordHandler(password);
+    dispatch(changePassword(password));
     reset();
   };
 

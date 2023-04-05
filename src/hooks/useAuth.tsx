@@ -1,9 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
+import { CheckAuthProps } from "../types/interfaces";
 import { useAppSelector } from "./reduxHooks";
-
-interface CheckAuthProps {
-  children: JSX.Element;
-}
 
 const UseAuth = ({ children }: CheckAuthProps) => {
   const { isAuth } = useAppSelector((state) => state.user);

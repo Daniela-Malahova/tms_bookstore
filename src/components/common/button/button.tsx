@@ -1,12 +1,5 @@
+import { ButtonProps } from "../../../types/interfaces";
 import "./button.scss";
-
-interface ButtonProps {
-  id: string;
-  disabled?: boolean;
-  text: string;
-  type: "submit" | "button";
-  onClick?: (event: React.MouseEvent) => void;
-}
 
 const Button = ({ id, disabled, text, type, onClick }: ButtonProps) => {
   return (

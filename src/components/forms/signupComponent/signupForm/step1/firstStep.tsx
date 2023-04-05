@@ -3,18 +3,16 @@ import { useForm } from "react-hook-form";
 import Button from "../../../../common/button/button";
 import Input from "../../../../common/input/input";
 import Checkbox from "../../../../common/checkbox/checkbox";
-import { UserDataProps } from "../signupForm";
+import {
+  LoginCredsProps,
+  UserDataProps,
+} from "../../../../../types/interfaces";
 import {
   checkEmail,
   checkStringToLatinAndNum,
 } from "../../../../../constants/regExp";
 
 import "../signupForm.scss";
-
-interface FirstStepData {
-  email: string;
-  password: string;
-}
 
 const FirstStep = ({ formData, setFormData }: UserDataProps) => {
   const [email, setEmail] = useState<string>("");
@@ -26,9 +24,9 @@ const FirstStep = ({ formData, setFormData }: UserDataProps) => {
     formState: { errors },
     handleSubmit,
     reset,
-  } = useForm<FirstStepData>({ mode: "onBlur" });
+  } = useForm<LoginCredsProps>({ mode: "onBlur" });
 
-  const formSubmitHandler = ({ email, password }: FirstStepData) => {
+  const formSubmitHandler = ({ email, password }: LoginCredsProps) => {
     setFormData({ ...formData, email, password });
     reset();
   };

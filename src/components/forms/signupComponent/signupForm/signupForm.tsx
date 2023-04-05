@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import { removeError } from "../../../../redux/slices/userSlice";
+import {
+  removeError,
+  setIsNewUserRegistred,
+} from "../../../../redux/slices/userSlice";
 import FirstStep from "./step1/firstStep";
 import SecondStep from "./step2/secondStep";
 import ThirdStep from "./step3/thirdStep";
@@ -10,23 +13,9 @@ import { SvgCollection } from "../../../common/svg/svg";
 
 import "./signupForm.scss";
 
-export interface FormDataProps {
-  login?: string;
-  password?: string;
-  userName?: string;
-  lastName?: string;
-  phoneNumber?: string;
-  email?: string;
-}
-
-export interface UserDataProps {
-  formData: FormDataProps;
-  setFormData: (e: any) => void;
-}
-
 const SignupForm = () => {
   const dispatch = useAppDispatch();
-  const { error, token } = useAppSelector((state) => state.user);
+  const { error, isNewUserRegistred } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -60,14 +49,19 @@ const SignupForm = () => {
     dispatch(removeError());
   };
 
+  const successfullyRegisterHandler = () => {
+    navigate("/auth", { replace: true });
+    dispatch(setIsNewUserRegistred());
+  };
+
   const getContent = () => {
-    if (token) {
+    if (isNewUserRegistred) {
       return (
         <AuthError
           title="Регистрация успешна"
           message="Регистрация прошла успешно. Зайдите в личный кабинет, используя свои email и пароль"
           buttonTitle="вход"
-          buttonHandler={() => navigate("/auth", { replace: true })}
+          buttonHandler={() => successfullyRegisterHandler()}
         />
       );
     } else if (error) {

@@ -2,31 +2,19 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import MaskedInput from "react-text-mask";
 import { useAppDispatch } from "../../../../../hooks/reduxHooks";
-import {
-  setError,
-  setIsStartLoaging,
-  setIsStopLoaging,
-  setUser,
-} from "../../../../../redux/slices/userSlice";
+import { signIn } from "../../../../../redux/slices/userSlice";
 import Button from "../../../../common/button/button";
 import Input from "../../../../common/input/input";
-import { UserDataProps } from "../signupForm";
 import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  updateProfile,
-} from "firebase/auth";
+  SignInThirdStepData,
+  UserDataProps,
+} from "../../../../../types/interfaces";
 import {
   checkPhone,
   checkStringToLatinAndNum,
 } from "../../../../../constants/regExp";
 
 import "../signupForm.scss";
-
-interface ThirdStepData {
-  phoneNumber: string;
-  login: string;
-}
 
 const ThirdStep = ({ formData, setFormData }: UserDataProps) => {
   const [login, setLogin] = useState<string>("");
@@ -38,39 +26,19 @@ const ThirdStep = ({ formData, setFormData }: UserDataProps) => {
     handleSubmit,
     reset,
     control,
-  } = useForm<ThirdStepData>({ mode: "onChange" });
+  } = useForm<SignInThirdStepData>({ mode: "onChange" });
 
-  const userRegistration = () => {
-    const auth = getAuth();
-
-    if (formData.email && formData.password) {
-      dispatch(setIsStartLoaging());
-      createUserWithEmailAndPassword(auth, formData.email, formData.password)
-        .then(({ user }) => {
-          updateProfile(user, {
-            displayName: `${formData.userName} ${formData.lastName}`,
-          });
-
-          dispatch(
-            setUser({
-              email: user.email,
-              id: user.uid,
-              token: user.refreshToken,
-            })
-          );
-        })
-        .catch((error) => {
-          dispatch(setError());
-        })
-        .finally(() => {
-          dispatch(setIsStopLoaging());
-        });
-    }
-  };
-
-  const formSubmitHandler = ({ phoneNumber, login }: ThirdStepData) => {
+  const formSubmitHandler = ({ phoneNumber, login }: SignInThirdStepData) => {
     setFormData({ ...formData, phoneNumber, login });
-    userRegistration();
+    const registerData = {
+      email: formData.email,
+      password: formData.password,
+      userName: formData.userName,
+      lastName: formData.lastName,
+      phoneNumber,
+      login,
+    };
+    dispatch(signIn(registerData));
     reset();
   };
 

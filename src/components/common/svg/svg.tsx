@@ -1,6 +1,4 @@
-interface PropsSvg {
-  id: string;
-}
+import { PropsSvg } from "../../../types/interfaces";
 
 export const SvgCollection = ({ id }: PropsSvg) => {
   switch (id) {
