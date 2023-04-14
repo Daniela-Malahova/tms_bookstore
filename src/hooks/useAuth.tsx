@@ -7,7 +7,7 @@ const UseAuth = ({ children }: CheckAuthProps) => {
   const { pathname } = useLocation();
 
   if (isAuth) {
-    return <Navigate to="/books" />;
+    return <Navigate to="/books/all" />;
   } else if (pathname === "/") {
     return <Navigate to="auth" />;
   }

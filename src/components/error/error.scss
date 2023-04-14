@@ -1,0 +1,62 @@
+.error_component--wrapper {
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 1110px;
+  width: 100%;
+  background-color: #feebea;
+  border: 1.5px solid #f42c4f;
+  border-radius: 5px;
+  z-index: 4;
+  .error_component--content {
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div {
+      display: flex;
+      align-items: center;
+      .error_component--message {
+        padding-left: 24px;
+        font-weight: 600px;
+        font-size: 16px;
+      }
+    }
+    .error_component--btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .error_component--wrapper {
+    top: 62px;
+    max-width: 640px;
+    .error_component--content {
+      padding: 24px 16px;
+      div {
+        .error_component--message {
+          padding-left: 12px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 440px) {
+  .error_component--wrapper {
+    top: 56px;
+    max-width: 280px;
+    .error_component--content {
+      padding: 12px 16px;
+      align-items: start;
+      div {
+        align-items: start;
+      }
+    }
+  }
+}

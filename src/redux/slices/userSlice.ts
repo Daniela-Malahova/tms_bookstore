@@ -23,6 +23,7 @@ const initialState: InitialStateUserSliceProps = {
   token: null,
   id: null,
   error: false,
+  userName: null,
   isLoading: false,
   isAuth: !!getLocalStorageItem("userToken"),
   isNewUserRegistred: false,
@@ -106,6 +107,11 @@ const userSlice = createSlice({
     setIsNewUserRegistred(state) {
       state.isNewUserRegistred = false;
     },
+    removeUser(state) {
+      state.isAuth = false;
+      localStorage.removeItem("userToken");
+      localStorage.removeItem("userName");
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -116,6 +122,10 @@ const userSlice = createSlice({
       .addCase(logIn.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isAuth = true;
+        state.userName = payload.userName;
+        if (payload.userName) {
+          localStorage.setItem("userName", payload.userName);
+        }
         localStorage.setItem("userToken", payload.refreshToken);
       })
       .addCase(logIn.rejected, (state) => {
@@ -163,6 +173,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { removeError, setIsNewUserRegistred } = userSlice.actions;
+export const { removeError, setIsNewUserRegistred, removeUser } =
+  userSlice.actions;
 
 export default userSlice.reducer;

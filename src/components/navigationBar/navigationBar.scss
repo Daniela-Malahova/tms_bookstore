@@ -1,0 +1,93 @@
+.books_filter--content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .search_container {
+    position: relative;
+    .search_input {
+      caret-color: hsl(13, 94%, 55%);
+      color: #363636;
+      width: 350px;
+      height: 38px;
+      padding-left: 40px;
+      box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2),
+        0px 3px 4px rgba(191, 196, 201, 0.18),
+        0px 1px 5px rgba(191, 196, 201, 0.24);
+      border-radius: 599px;
+    }
+    .search_input::placeholder {
+      font-size: 14px;
+      line-height: 18px;
+      color: #a7a7a7;
+    }
+    svg {
+      position: absolute;
+      top: 11px;
+      left: 15px;
+    }
+  }
+  .rating_container {
+    width: 150px;
+    .rating {
+      display: none;
+    }
+    .rating-content_label {
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+      line-height: 18px;
+      color: #a7a7a7;
+      padding: 10px 16px;
+      box-shadow: 0px 2px 4px rgba(191, 196, 201, 0.2),
+        0px 3px 4px rgba(191, 196, 201, 0.18),
+        0px 1px 5px rgba(191, 196, 201, 0.24);
+      border-radius: 30px;
+    }
+    svg {
+      cursor: pointer;
+      margin-right: 8px;
+    }
+    .rating-content_label:hover {
+      box-shadow: 0px 3px 4px rgba(222, 125, 11, 0.2),
+        0px 1px 10px rgba(249, 89, 8, 0.2);
+    }
+    .rating:checked + .rating-content_label svg {
+      transition: transform 0.35s;
+      transform: rotate(180deg);
+    }
+  }
+  .list_view_container {
+    display: flex;
+    justify-content: space-between;
+    width: 92px;
+    .tile_books--radio,
+    .list_books--radio {
+      display: none;
+    }
+    .tile_books_label,
+    .list_books_label {
+      cursor: pointer;
+      padding-right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    svg {
+      margin-top: 2px;
+      fill: #ffff;
+      transition: 0.3s;
+    }
+    .list_books--radio:checked + .list_books_label > svg,
+    .tile_books--radio:checked + .tile_books_label > svg {
+      fill: hsl(13, 94%, 55%);
+    }
+    .list_books--radio:checked + .list_books_label > svg > g > path,
+    .tile_books--radio:checked + .tile_books_label > svg > g > path {
+      fill: #ffff;
+    }
+  }
+}
+
+.list_books--radio:checked + .list_books_label svg {
+  fill: hsl(13, 94%, 55%);
+}

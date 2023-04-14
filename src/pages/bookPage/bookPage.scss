@@ -1,0 +1,97 @@
+.book_wrapper {
+  .book_info {
+    display: flex;
+    justify-content: space-between;
+  }
+  .book_info--content {
+    padding-left: 30px;
+    .book_info--title {
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 40px;
+      color: #363636;
+    }
+    .book_info--author {
+      padding-top: 24px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 28px;
+      color: #a7a7a7;
+    }
+
+    .book_info--about {
+      padding-top: 62px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 28px;
+      color: #363636;
+    }
+    .book_info--epilogue {
+      padding-top: 32px;
+      font-size: 16px;
+      line-height: 24px;
+      color: #363636;
+    }
+  }
+  .book_title {
+    position: relative;
+    width: 350px;
+    padding-top: 62px;
+    padding-bottom: 16px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 28px;
+    color: #363636;
+  }
+  .book_title::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid #ebebeb;
+  }
+  .book_info--btn {
+    cursor: pointer;
+    margin-top: 32px;
+    height: 52px;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 18px;
+    background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
+    border-radius: 30px;
+    color: #ffffff;
+    text-transform: uppercase;
+    width: 45%;
+    transition: 0.3s;
+  }
+  .book_info--btn:hover {
+    background: #ffffff;
+    color: #363636;
+    border: 1px solid #bfc4c9;
+    box-shadow: 0px 3px 4px rgba(222, 125, 11, 0.2),
+      0px 1px 10px rgba(249, 89, 8, 0.2);
+  }
+
+  .book_about {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    .book_about-info {
+      padding-top: 16px;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 24px;
+      color: #a7a7a7;
+    }
+    .book_about-data {
+      padding-top: 16px;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      color: #363636;
+    }
+  }
+
+  .book_reviews {
+    width: 730px;
+  }
+}

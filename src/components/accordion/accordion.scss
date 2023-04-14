@@ -1,0 +1,80 @@
+.acor-container {
+  min-width: 225px;
+  margin: 10px 0px 20px;
+}
+.acor-container .acor-body {
+  width: calc(100% - 40px);
+  margin: 0 auto;
+  height: 0;
+  line-height: 18px;
+  box-sizing: border-box;
+  transition: color 0.5s, padding 0.5s;
+  overflow: hidden;
+  font-size: 16px;
+}
+.acor-container .acor-body p {
+  padding-top: 15px;
+  font-size: 16px;
+  line-height: 24px;
+}
+.acor-container .acor-content_label {
+  cursor: pointer;
+  position: relative;
+  display: block;
+  padding: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 2;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: hsl(13, 94%, 55%);
+  transition: color 0.35s;
+}
+.acor-container .acor_input {
+  display: none;
+}
+.acor-container .acor-content_label:before {
+  content: "\276F";
+  float: right;
+}
+
+.acor-container .acor-content_label::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: hsl(13, 94%, 55%);
+  width: 100%;
+  height: 1px;
+}
+
+.acor-container .acor_inputinput:checked + .acor-content_label:before {
+  transition: transform 0.35s;
+  transform: rotate(90deg);
+}
+.acor-container .acor_input:checked + .acor-content_label + .acor-body {
+  height: auto;
+  margin-top: -15px;
+  color: #363636;
+  padding: 10px 0;
+}
+
+.acor_all__books {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: hsl(13, 94%, 55%);
+}
+
+.acor-terms_of_use {
+  padding-top: 25px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: #363636;
+}
+
+.acor-terms_of_use:hover {
+  color: hsl(13, 94%, 55%);
+}
