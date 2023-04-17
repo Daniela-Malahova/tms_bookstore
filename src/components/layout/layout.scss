@@ -1,0 +1,31 @@
+.layout_header {
+  position: relative;
+}
+
+.layout_header::after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  bottom: 10px;
+  box-shadow: 4px 4px 4px rgba(54, 54, 54, 0.05),
+    -4px 4px 4px rgba(54, 54, 54, 0.05);
+}
+
+.layout_content_wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 35px 165px 0 165px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  .layout_app_container {
+    flex: 1;
+  }
+}
+
+@media (max-width: 740px) {
+  .layout_content_wrapper {
+    padding: 35px 0 0 0;
+  }
+}

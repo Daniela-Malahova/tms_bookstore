@@ -70,9 +70,57 @@ export interface InitialStateUserSliceProps {
   token: string | null;
   id: string | null;
   error: boolean;
+  userName: string | null;
   isLoading: boolean;
   isAuth: boolean;
   isNewUserRegistred: boolean;
   isResetEmail: boolean;
   isChangedPassword: boolean;
+}
+
+export interface CategoriesProps {
+  id: number;
+  name: string;
+  path: string;
+}
+
+export interface ViewProps {
+  viewType?: string;
+}
+
+export interface SearchProps extends ViewProps {
+  search: string;
+  setSearch: (str: string) => void;
+  changeViewHandler: (view: string) => void;
+}
+
+export interface AccordionProps {
+  categories: Array<CategoriesProps>;
+}
+
+export interface BookImgProps {
+  url: string;
+}
+
+export interface BooksProps extends ViewProps {
+  issueYear: string;
+  rating: number;
+  title: string;
+  authors: string[];
+  image: BookImgProps;
+  categories: string[];
+  id: number;
+}
+
+export interface RatingProps {
+  rating: number;
+}
+
+export interface SearchNotificationProps {
+  message: string;
+}
+
+export interface BooksPageProps { 
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
 }

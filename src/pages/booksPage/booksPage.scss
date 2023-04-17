@@ -1,0 +1,62 @@
+.books_main_container {
+  width: 825px;
+  padding-top: 15px;
+  padding-left: 10px;
+  .book-grid_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .books-more_btn--container {
+    display: flex;
+    justify-content: center;
+    .books_more--btn {
+      text-align: center;
+      width: 160px;
+      cursor: pointer;
+      margin-top: 28px;
+      margin-bottom: 8px;
+      height: 40px;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 18px;
+      color: #f83600;
+      background: #fff;
+      border: 1px solid #bfc4c9;
+      box-shadow: 0px 4px 4px rgba(222, 125, 11, 0.2),
+        0px 3px 10px rgba(249, 89, 8, 0.2);
+      border-radius: 20px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+  }
+}
+
+@media (max-width: 1290px) {
+  .books_main_container {
+    margin: 0 auto;
+    .book-grid_container {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .books_main_container {
+    margin: 0 auto;
+    width: 445px;
+    .book-grid_container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .books_main_container {
+    margin: 0 auto;
+    width: 445px;
+    .book-grid_container {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+  }
+}

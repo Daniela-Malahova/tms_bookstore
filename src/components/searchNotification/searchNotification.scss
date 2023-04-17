@@ -1,0 +1,45 @@
+.search_notification--wrapper {
+  width: 825px;
+  text-align: center;
+  .search_notification--title {
+    margin-top: 200px;
+    font-size: 32px;
+    color: #a7a7a7;
+  }
+}
+
+@media (max-width: 1250px) {
+  .search_notification--wrapper {
+    width: 640px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .search_notification--wrapper {
+    width: 570px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .search_notification--wrapper {
+    width: 445px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search_notification--wrapper {
+    .search_notification--title {
+      margin-top: 226px;
+    }
+  }
+}
+
+@media (max-width: 440px) {
+  .search_notification--wrapper {
+    width: 288px;
+    .search_notification--title {
+      margin-top: 134px;
+      font-size: 18px;
+    }
+  }
+}

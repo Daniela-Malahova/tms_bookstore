@@ -54,7 +54,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isAuth) {
-      navigate("/books", { replace: true });
+      navigate("/books/all", { replace: true });
     }
   }, [isAuth]);
 
