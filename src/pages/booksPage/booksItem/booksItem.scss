@@ -132,3 +132,80 @@
 .css-1vooibu-MuiSvgIcon-root {
   fill: #ffbc1f !important;
 }
+
+@media (max-width: 1220px) {
+  .books_item--container_list {
+    .list_content {
+      .books-item--title_list {
+        width: 450px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1050px) {
+  .books_item--container_list {
+    .list_content {
+      .books-item--title_list {
+        width: 330px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .books_item--container_list {
+    .list_content {
+      .books-item--title_list {
+        width: 295px;
+        height: 60px;
+        font-weight: 600;
+        font-size: 16px;
+      }
+      .list_rating_btn {
+        margin-top: 40px;
+        max-width: 260px;
+        .books-item--btn {
+          margin-top: 0;
+          margin-bottom: 0;
+          height: 35px;
+          width: 100px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .book-grid_container__list {
+    display: grid;
+    justify-items: center;
+    .books_item--container_list {
+      width: 330px;
+      .list_img {
+        img {
+          width: 70px;
+          height: 110px;
+        }
+      }
+      .list_content {
+        .books-item--title_list {
+          width: 230px;
+          height: 55px;
+          overflow: hidden;
+        }
+        .books-item--author_list {
+          font-size: 12px;
+        }
+        .list_rating_btn {
+          display: block;
+          margin-top: 5px;
+          .books-item--btn {
+            width: 220px;
+            margin-top: 10px;
+          }
+        }
+      }
+    }
+  }
+}

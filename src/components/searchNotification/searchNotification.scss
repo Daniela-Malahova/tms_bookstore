@@ -8,9 +8,26 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1250px) {
   .search_notification--wrapper {
     width: 640px;
+  }
+}
+
+@media (max-width: 1250px) {
+  .search_notification--wrapper {
+    width: 570px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .search_notification--wrapper {
+    width: 445px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search_notification--wrapper {
     .search_notification--title {
       margin-top: 226px;
     }

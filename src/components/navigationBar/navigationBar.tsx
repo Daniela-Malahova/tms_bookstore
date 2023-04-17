@@ -32,49 +32,50 @@ const NavigationBar: React.FC<SearchProps> = ({
         />
         <SvgCollection id={search ? "ActionSearch" : "Search"} />
       </div>
+      <div>
+        <div className="rating_container">
+          <input
+            className="rating"
+            type="checkbox"
+            id="rating"
+            name="rating"
+            onChange={sortHandler}
+          />
 
-      <div className="rating_container">
-        <input
-          className="rating"
-          type="checkbox"
-          id="rating"
-          name="rating"
-          onChange={sortHandler}
-        />
+          <label className="rating-content_label" htmlFor="rating">
+            <SvgCollection id="Rating" />
+            <p>По рейтингу</p>
+          </label>
+        </div>
 
-        <label className="rating-content_label" htmlFor="rating">
-          <SvgCollection id="Rating" />
-          По рейтингу
-        </label>
-      </div>
+        <div className="list_view_container">
+          <input
+            className="tile_books--radio"
+            type="radio"
+            id="tile_books"
+            name="tile_books"
+            value="view-type-tile"
+            checked={viewType === "view-type-tile"}
+            onChange={(e) => changeViewHandler(e.target.value)}
+          />
+          <label className="tile_books_label" htmlFor="tile_books">
+            <SvgCollection id="ListViewActive" />
+          </label>
 
-      <div className="list_view_container">
-        <input
-          className="tile_books--radio"
-          type="radio"
-          id="tile_books"
-          name="tile_books"
-          value="view-type-tile"
-          checked={viewType === "view-type-tile"}
-          onChange={(e) => changeViewHandler(e.target.value)}
-        />
-        <label className="tile_books_label" htmlFor="tile_books">
-          <SvgCollection id="ListViewActive" />
-        </label>
+          <input
+            className="list_books--radio"
+            type="radio"
+            id="list_books"
+            name="list_books"
+            value="view-type-list"
+            checked={viewType === "view-type-list"}
+            onChange={(e) => changeViewHandler(e.target.value)}
+          />
 
-        <input
-          className="list_books--radio"
-          type="radio"
-          id="list_books"
-          name="list_books"
-          value="view-type-list"
-          checked={viewType === "view-type-list"}
-          onChange={(e) => changeViewHandler(e.target.value)}
-        />
-
-        <label className="list_books_label" htmlFor="list_books">
-          <SvgCollection id="ListView" />
-        </label>
+          <label className="list_books_label" htmlFor="list_books">
+            <SvgCollection id="ListView" />
+          </label>
+        </div>
       </div>
     </div>
   );

@@ -75,3 +75,19 @@
     }
   }
 }
+
+@media (max-width: 850px) {
+  .header_wrapper {
+    .user_content {
+      .user_content--label {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .header_wrapper {
+    padding: 0px 0px 25px 20px;
+  }
+}

@@ -30,3 +30,33 @@
     }
   }
 }
+
+@media (max-width: 1290px) {
+  .books_main_container {
+    margin: 0 auto;
+    .book-grid_container {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  .books_main_container {
+    margin: 0 auto;
+    width: 445px;
+    .book-grid_container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .books_main_container {
+    margin: 0 auto;
+    width: 445px;
+    .book-grid_container {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+  }
+}

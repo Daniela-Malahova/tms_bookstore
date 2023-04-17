@@ -23,7 +23,7 @@ const ListItem: React.FC<BooksProps> = ({
         />
       </div>
       <div className="list_content">
-        <p className="books-item--title_list">{title}</p>
+        <p className="books-item--title_list">{title.length > 46 ? `${title.slice(0, 46)}...` : title}</p>
         <p className="books-item--author_list">
           {authors}, {issueYear}
         </p>
