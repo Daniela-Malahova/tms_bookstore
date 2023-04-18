@@ -41,7 +41,7 @@ const ListItem: React.FC<BooksProps> = ({
               "ещё нет оценок"
             )}
           </p>
-          <button className="books-item--btn">Купить</button>
+          <button className="books-item--btn">Подробнее</button>
         </div>
       </div>
     </div>
