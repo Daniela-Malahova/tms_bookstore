@@ -14,7 +14,7 @@ const Layout = () => {
   return (
     <>
       <div className="layout_header">
-        <Header />
+        <Header  />
       </div>
 
       <div className="layout_content_wrapper">

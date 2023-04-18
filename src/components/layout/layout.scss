@@ -24,6 +24,12 @@
   }
 }
 
+@media (max-width: 850px) {
+  .layout_header::after {
+    box-shadow: none;
+  }
+}
+
 @media (max-width: 740px) {
   .layout_content_wrapper {
     padding: 35px 0 0 0;

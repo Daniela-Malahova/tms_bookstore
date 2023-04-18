@@ -37,7 +37,7 @@ const TileItem: React.FC<BooksProps> = ({
       <p className="books-item--author">
         {authors}, {issueYear}
       </p>
-      <button className="books-item--btn">Купить</button>
+      <button className="books-item--btn">Подробнее</button>
     </div>
   );
 };

@@ -2,10 +2,12 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { removeUser } from "../../redux/slices/userSlice";
+
+import BurgerMenu from "../burgerMenu/burgerMenu";
 import "./header.scss";
 
 const Header = () => {
-  const [checked, setChecked] = useState<boolean>();
+  const [checked, setChecked] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const userName = localStorage.getItem("userName");
 
@@ -40,6 +42,7 @@ const Header = () => {
             </p>
           </div>
         )}
+        <BurgerMenu />
       </div>
     </div>
   );
