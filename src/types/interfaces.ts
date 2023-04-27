@@ -110,6 +110,7 @@ export interface BooksProps extends ViewProps {
   image: BookImgProps;
   categories: string[];
   id: number;
+  category: string | undefined;
 }
 
 export interface RatingProps {
@@ -120,7 +121,72 @@ export interface SearchNotificationProps {
   message: string;
 }
 
-export interface BooksPageProps { 
+export interface BooksPageProps {
   currentPage: number;
   setCurrentPage: (page: number) => void;
 }
+
+export interface ImagesProps {
+  url: string;
+}
+
+export interface CommentUserProps {
+  commentUserId: number | string;
+  firstName: string | undefined;
+  lastName: string | undefined;
+  avatarUrl: string | null;
+}
+
+export interface CommentsProps {
+  id: number | string;
+  rating: number | null;
+  text: string;
+  createdAt: string;
+  user: CommentUserProps;
+}
+
+export interface BookProps {
+  id?: number;
+  title: string;
+  rating: number | null;
+  issueYear: string;
+  description: string;
+  publish: string;
+  pages: string;
+  cover: string;
+  weight: string;
+  format: string;
+  ISBN: string;
+  producer: string;
+  authors: string[];
+  images: Array<ImagesProps> | null;
+  categories: string[];
+  comments: Array<CommentsProps> | null;
+}
+
+export interface SliderProps {
+  img: Array<ImagesProps>;
+}
+
+export interface BreadCrumbsProps {
+  categoryPath: string;
+  title: string;
+}
+
+export interface CommentsReviewProps {
+  comments: Array<CommentsProps> | null;
+  isAccordionOpen: boolean;
+}
+
+export interface BookReviewsProps {
+  comments: Array<CommentsProps> | null;
+}
+
+export interface AddedCommentsProps {
+  isModalOpen: boolean;
+  setIsModalOpen: (isModalOpen: boolean) => void;
+}
+
+// export interface PutCommentProps extends CommentsProps {
+//   bookId: string;
+// }

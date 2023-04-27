@@ -53,6 +53,7 @@
   transition: transform 0.35s;
   transform: rotate(90deg);
 }
+
 .acor-container .acor_input:checked + .acor-content_label + .acor-body {
   height: auto;
   margin-top: -15px;
@@ -66,6 +67,7 @@
   line-height: 28px;
   color: hsl(13, 94%, 55%);
 }
+
 
 .acor-terms_of_use {
   padding-top: 25px;

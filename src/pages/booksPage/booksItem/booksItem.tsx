@@ -12,6 +12,7 @@ const BooksItem: React.FC<BooksProps> = ({
   issueYear,
   authors,
   categories,
+  category,
   image,
 }) => {
   const commonProps = {
@@ -21,6 +22,7 @@ const BooksItem: React.FC<BooksProps> = ({
     issueYear,
     authors,
     categories,
+    category,
     image,
   };
   return (

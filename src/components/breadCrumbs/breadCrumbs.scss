@@ -1,0 +1,40 @@
+.books_nav {
+  margin-bottom: 50px;
+  .books_nav_wrapper {
+    margin: 0 auto;
+    padding: 20px 0;
+    max-width: 1110px;
+    color: #a7a7a7;
+    a {
+      color: #a7a7a7;
+    }
+    a:hover {
+      background: linear-gradient(231.58deg, #f83600 -53.35%, #f9d423 297.76%);
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .separator {
+      font-size: 18px;
+      font-weight: 500;
+      padding: 0 10px;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  .books_nav {
+    margin-bottom: 30px;
+    .books_nav_wrapper {
+      max-width: 640px;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  .books_nav {
+    margin-bottom: 20px;
+    .books_nav_wrapper {
+      max-width: 300px;
+    }
+  }
+}

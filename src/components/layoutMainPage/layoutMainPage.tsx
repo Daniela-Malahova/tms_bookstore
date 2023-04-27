@@ -7,12 +7,12 @@ import { getCategories } from "../../redux/slices/categoriesSlice";
 import "./layoutMainPage.scss";
 
 const LayoutMainPage = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
   const { categories } = useAppSelector((state) => state.categories);
 
-  useEffect(() => {
-    dispatch(getCategories());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCategories());
+  // }, []);
 
   return (
     <div className="layout_main_content">

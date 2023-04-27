@@ -1,4 +1,5 @@
 import Rating from "@mui/material/Rating";
+import { NavLink } from "react-router-dom";
 import { BooksProps } from "../../../../types/interfaces";
 
 const TileItem: React.FC<BooksProps> = ({
@@ -7,7 +8,7 @@ const TileItem: React.FC<BooksProps> = ({
   rating,
   issueYear,
   authors,
-  categories,
+  category,
   image,
 }) => {
   return (
@@ -37,7 +38,9 @@ const TileItem: React.FC<BooksProps> = ({
       <p className="books-item--author">
         {authors}, {issueYear}
       </p>
-      <button className="books-item--btn">Подробнее</button>
+      <NavLink to={`books/../../${category}/${id}`}>
+        <button className="books-item--btn">Подробнее</button>
+      </NavLink>
     </div>
   );
 };

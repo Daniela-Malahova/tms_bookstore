@@ -2,8 +2,8 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { removeUser } from "../../redux/slices/userSlice";
-
 import BurgerMenu from "../burgerMenu/burgerMenu";
+
 import "./header.scss";
 
 const Header = () => {
@@ -42,6 +42,7 @@ const Header = () => {
             </p>
           </div>
         )}
+
         <BurgerMenu />
       </div>
     </div>

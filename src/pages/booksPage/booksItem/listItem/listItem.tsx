@@ -1,4 +1,5 @@
 import Rating from "@mui/material/Rating";
+import { NavLink } from "react-router-dom";
 import { BooksProps } from "../../../../types/interfaces";
 
 const ListItem: React.FC<BooksProps> = ({
@@ -7,7 +8,7 @@ const ListItem: React.FC<BooksProps> = ({
   rating,
   issueYear,
   authors,
-  categories,
+  category,
   image,
 }) => {
   return (
@@ -23,7 +24,9 @@ const ListItem: React.FC<BooksProps> = ({
         />
       </div>
       <div className="list_content">
-        <p className="books-item--title_list">{title.length > 46 ? `${title.slice(0, 46)}...` : title}</p>
+        <p className="books-item--title_list">
+          {title.length > 46 ? `${title.slice(0, 46)}...` : title}
+        </p>
         <p className="books-item--author_list">
           {authors}, {issueYear}
         </p>
@@ -41,7 +44,9 @@ const ListItem: React.FC<BooksProps> = ({
               "ещё нет оценок"
             )}
           </p>
-          <button className="books-item--btn">Подробнее</button>
+          <NavLink to={`books/../../${category}/${id}`}>
+            <button className="books-item--btn">Подробнее</button>
+          </NavLink>
         </div>
       </div>
     </div>
