@@ -1,77 +1,119 @@
+import Rating from "@mui/material/Rating";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import Loader from "../../components/loader/loader";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { clearBook, getBook } from "../../redux/slices/bookSlice";
+import Error from "../../components/error/error";
+import Slider from "../../components/slider/slider";
+import BreadCrumbs from "../../components/breadCrumbs/breadCrumbs";
+import BookReviews from "../../components/bookReviews/bookReviews";
+
 import "./bookPage.scss";
 
 const BookPage = () => {
+  const { loading, error, book } = useAppSelector((state) => state.book);
+  const path = useParams();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (path.id) {
+      dispatch(getBook(path.id));
+    }
+    return () => {
+      dispatch(clearBook());
+    };
+  }, [path.id]);
+
+  const defaultImg = require("../../assets/default_book_img.png");
+
+  const showImages = () => {
+    if (book.images) {
+      if (book.images.length > 1) {
+        return <Slider img={book.images} />;
+      } else {
+        return <img src={book.images[0].url} alt="bookImg" />;
+      }
+    } else {
+      return <img src={defaultImg} alt="bookImg" />;
+    }
+  };
+
   return (
-    <div className="book_wrapper">
-      <div className="book_info">
-        <div className="book_info--img">
-          <img src={require("../../assets/book_img_big.png")} alt="bookImg" />
+    <>
+      {loading && <Loader />}
+      {error && <Error />}
+      {path.category && (
+        <BreadCrumbs categoryPath={path.category} title={book.title} />
+      )}
+      <div className="book_wrapper">
+        <div className="book_info">
+          <div className="book_info--img">{showImages()}</div>
+          <div className="book_info--content">
+            <p className="book_info--title">{book.title}</p>
+            <p className="book_info--author">
+              {book.authors} , {book.issueYear}
+            </p>
+            <div className="book-description-desktop">
+              <p className="book_info--about">О книге</p>
+              <p className="book_info--epilogue">{book.description}</p>
+            </div>
+          </div>
         </div>
-        <div className="book_info--content">
-          <p className="book_info--title">
-            Грокаем алгоритмы. Иллюстрированное пособие для программистов
-            и любопытствующих
-          </p>
-          <p className="book_info--author">Адитья Бхаргава, 2019</p>
-          <button className="book_info--btn">Купить</button>
+        <div className="book-description-mobile">
           <p className="book_info--about">О книге</p>
-          <p className="book_info--epilogue">
-            Алгоритмы — это всего лишь пошаговые алгоритмы решения задач,
-            и большинство таких задач уже были кем-то решены, протестированы
-            и проверены. Можно, конечно, погрузится в глубокую философию
-            гениального Кнута, изучить многостраничные фолианты
-            с доказательствами и обоснованиями, но хотите ли вы тратить на это
-            свое время?
-          </p>
-          <p className="book_info--epilogue">
-            Откройте великолепно иллюстрированную книгу и вы сразу поймете, что
-            алгоритмы — это просто. А грокать алгоритмы — это веселое
-            и увлекательное занятие.
-          </p>
+          <p className="book_info--epilogue">{book.description}</p>
         </div>
-      </div>
+        <div className="book_rating">
+          <p className="book_title">Рейтинг</p>
+          <div className="book-rating--item">
+            <Rating
+              name="half-rating-read"
+              value={book.rating ? book.rating : 0}
+              precision={0.5}
+              readOnly
+            />
+            {!book.rating ? (
+              <span className="rating">ещё нет оценок</span>
+            ) : (
+              <span className="rating">{book.rating}</span>
+            )}
+          </div>
+        </div>
+        <p className="book_title">Подробная информация</p>
+        <div className="book_about">
+          <div className="book_about--first">
+            <p className="book_about-info">Издательство</p>
+            <p className="book_about-info">Год издания</p>
+            <p className="book_about-info">Страниц</p>
+            <p className="book_about-info">Переплёт</p>
+            <p className="book_about-info">Формат</p>
+          </div>
+          <div className="book_grig">
+            <p className="book_about-data">{book.publish}</p>
+            <p className="book_about-data">{book.issueYear}</p>
+            <p className="book_about-data">{book.pages}</p>
+            <p className="book_about-data">{book.cover}</p>
+            <p className="book_about-data">{book.format}</p>
+          </div>
 
-      <div className="book_rating">
-        <p className="book_title">Рейтинг</p>
-      </div>
-      <p className="book_title">Подробная информация</p>
-      <div className="book_about">
-        <div className="book_about--first">
-          <p className="book_about-info">Издательство</p>
-          <p className="book_about-info">Год издания</p>
-          <p className="book_about-info">Страниц</p>
-          <p className="book_about-info">Переплёт</p>
-          <p className="book_about-info">Формат</p>
-        </div>
-        <div className="book_grig">
-          <p className="book_about-data">Питер</p>
-          <p className="book_about-data">2019</p>
-          <p className="book_about-data">288</p>
-          <p className="book_about-data">Мягкая обложка</p>
-          <p className="book_about-data">70х100</p>
+          <div className="book_about--second">
+            <p className="book_about-info">Жанр</p>
+            <p className="book_about-info">Вес</p>
+            <p className="book_about-info">ISBN</p>
+            <p className="book_about-info">Изготовитель</p>
+          </div>
+          <div className="book_grig">
+            <p className="book_about-data">{book.categories}</p>
+            <p className="book_about-data">{book.weight} г.</p>
+            <p className="book_about-data">{book.ISBN}</p>
+            <p className="book_about-data">{book.producer}</p>
+          </div>
         </div>
 
-        <div className="book_about--second">
-          <p className="book_about-info">Жанр</p>
-          <p className="book_about-info">Вес</p>
-          <p className="book_about-info">ISBN</p>
-          <p className="book_about-info">Изготовитель</p>
-        </div>
-        <div className="book_grig">
-          <p className="book_about-data">Компьютерная литература</p>
-          <p className="book_about-data">370 г</p>
-          <p className="book_about-data">978-5-4461-0923-4</p>
-          <p className="book_about-data">
-            ООО «Питер Мейл». РФ, 198 206, г. Санкт-Петербург, Петергофское ш,
-            д. 73, лит. А29
-          </p>
-        </div>
+        <BookReviews comments={book.comments} />
       </div>
-      <div className="book_reviews">
-        <p className="book_title">Отзывы</p>
-        <button className="book_info--btn">оценить книгу</button>
-      </div>
-    </div>
+    </>
   );
 };
 

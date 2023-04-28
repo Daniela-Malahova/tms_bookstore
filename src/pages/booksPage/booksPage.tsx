@@ -7,7 +7,10 @@ import { BooksPageProps } from "../../types/interfaces";
 import BooksItem from "./booksItem/booksItem";
 import "./booksPage.scss";
 
-const BooksPage: React.FC<BooksPageProps> = ({currentPage, setCurrentPage}) => {
+const BooksPage: React.FC<BooksPageProps> = ({
+  currentPage,
+  setCurrentPage,
+}) => {
   const [viewType, setViewType] = useState("view-type-tile");
   const [search, setSearch] = useState<string>("");
   const { books, onLastPage } = useAppSelector((state) => state.books);
@@ -43,20 +46,20 @@ const BooksPage: React.FC<BooksPageProps> = ({currentPage, setCurrentPage}) => {
         key={card.id}
         title={card.title}
         rating={card.rating}
+        categories={card.categories}
         issueYear={card.issueYear}
         authors={card.authors}
-        categories={card.categories}
         image={card.image}
+        category={category}
       />
     )
   );
 
   const getContent = () => {
-
     if (search && !booksCards.length) {
       return <SearchNotification message="По запросу ничего не найдено" />;
     }
-    
+
     if (!booksCards.length) {
       return <SearchNotification message="В этой категории книг ещё нет" />;
     }
@@ -64,7 +67,10 @@ const BooksPage: React.FC<BooksPageProps> = ({currentPage, setCurrentPage}) => {
   };
 
   const moreBtn = !onLastPage && !!booksCards?.length && (
-    <button className="books_more--btn" onClick={() => setCurrentPage(currentPage + 1)}>
+    <button
+      className="books_more--btn"
+      onClick={() => setCurrentPage(currentPage + 1)}
+    >
       Загрузить ещё...
     </button>
   );

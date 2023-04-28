@@ -15,16 +15,20 @@ import BookPage from "../../pages/bookPage/bookPage";
 import { getBooks } from "../../redux/slices/booksSlice";
 
 import "./App.css";
+import { getCategories } from "../../redux/slices/categoriesSlice";
 
 function App() {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getBooks(currentPage))
-    console.log('app render')
-  }, [dispatch, currentPage])
-  
+    dispatch(getBooks(currentPage));
+  }, [dispatch, currentPage]);
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, []);
+
   return (
     <Routes>
       <Route
@@ -48,9 +52,17 @@ function App() {
       >
         <Route path="/" element={<LayoutMainPage />}>
           <Route path="terms" element={<TermsOfUse />} />
-          <Route path="books/:category" element={<BooksPage currentPage={currentPage} setCurrentPage={setCurrentPage}/>} />
+          <Route
+            path="books/:category"
+            element={
+              <BooksPage
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+              />
+            }
+          />
         </Route>
-        <Route path="/book" element={<BookPage />} />
+        <Route path="/books/:category/:id" element={<BookPage />} />
       </Route>
     </Routes>
   );
