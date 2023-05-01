@@ -36,7 +36,7 @@ const AddedComments: React.FC<AddedCommentsProps> = ({
 
   const getCommentHandler = (e: any) => {
     e.preventDefault();
-    if (commentMessage) {
+    if (rating) {
       const newComment = {
         id: uuidv4(),
         rating: rating,
@@ -49,13 +49,12 @@ const AddedComments: React.FC<AddedCommentsProps> = ({
           avatarUrl: null,
         },
       };
-
+      setIsModalOpen(false);
       dispatch(putComment(newComment));
     }
 
     setRating(0);
     setCommentMessage("");
-    setIsModalOpen(false);
   };
 
   const clickHandler = (e: any) => {
