@@ -110,7 +110,7 @@ const LoginForm = () => {
               {errorPasswordMessage}
 
               <NavLink to="/password" className="form_text_password">
-                Забыли логин или пароль?
+                Забыли пароль?
               </NavLink>
               <Button id="button-form-login" text="вход" type="submit" />
               <div className="arrow_link">

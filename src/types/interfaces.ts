@@ -186,7 +186,3 @@ export interface AddedCommentsProps {
   isModalOpen: boolean;
   setIsModalOpen: (isModalOpen: boolean) => void;
 }
-
-// export interface PutCommentProps extends CommentsProps {
-//   bookId: string;
-// }
