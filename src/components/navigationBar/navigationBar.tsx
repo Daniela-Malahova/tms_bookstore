@@ -27,7 +27,7 @@ const NavigationBar: React.FC<SearchProps> = ({
           type="text"
           name="search"
           id="search"
-          placeholder="Поиск книги или автора…"
+          placeholder="Поиск по названию книги..."
           onChange={(e) => setSearch(e.target.value)}
         />
         <SvgCollection id={search ? "ActionSearch" : "Search"} />
